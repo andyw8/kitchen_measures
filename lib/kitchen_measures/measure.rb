@@ -3,6 +3,8 @@ require "unitwise"
 
 module KitchenMeasures
   class Measure
+    include Comparable
+
     class Unitless
       include Singleton
 
@@ -20,6 +22,10 @@ module KitchenMeasures
       new(quantity, unit)
     end
 
+    def self.from_unitwise(unitwise)
+      new(unitwise.value, unitwise.unit)
+    end
+
     def self.without_unit(quantity)
       new(quantity, Unitless.instance)
     end
@@ -28,20 +34,32 @@ module KitchenMeasures
       [quantity, unit].join(" ").strip
     end
 
-    def ==(other)
-      if unitless?
-        quantity == other.quantity && unit == other.unit
-      else
-        to_unitwise == other.to_unitwise
-      end
-    end
-
     def <=>(other)
-      to_unitwise <=> other.to_unitwise
+      if unitless?
+        quantity <=> other.quantity
+      else
+        to_unitwise <=> other.to_unitwise
+      end
     end
 
     def unitless?
       unit == Unitless.instance
+    end
+
+    def *(value)
+      if unitless?
+        self.class.without_unit(quantity * value)
+      else
+        self.class.from_unitwise(to_unitwise * value)
+      end
+    end
+
+    def /(value)
+      if unitless?
+        self.class.without_unit(quantity / value)
+      else
+        self.class.from_unitwise(to_unitwise / value)
+      end
     end
 
     protected

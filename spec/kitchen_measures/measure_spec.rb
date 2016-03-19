@@ -58,23 +58,31 @@ RSpec.describe KitchenMeasures::Measure do
     end
   end
 
-  # describe "calculations" do
-  #   specify do
-  #     measure = described_class.with_unit(1, "kg")
-  #
-  #     result = measure * 2
-  #
-  #     expect(result).to eq(described_class.with_unit(2, "kg"))
-  #   end
-  #
-  #   specify do
-  #     measure = described_class.with_unit(2, "kg")
-  #
-  #     result = measure / 2
-  #
-  #     expect(result).to eq(described_class.with_unit(1, "kg"))
-  #   end
-  # end
+  describe "calculations" do
+    specify do
+      measure = described_class.with_unit(1, "kg")
+
+      result = measure * 2
+
+      expect(result).to eq(described_class.with_unit(2, "kg"))
+    end
+
+    specify do
+      measure = described_class.without_unit(1)
+
+      result = measure * 2
+
+      expect(result).to eq(described_class.without_unit(2))
+    end
+
+    specify do
+      measure = described_class.with_unit(2, "kg")
+
+      result = measure / 2
+
+      expect(result).to eq(described_class.with_unit(1, "kg"))
+    end
+  end
 
   describe "ordering" do
     specify do
