@@ -1,8 +1,9 @@
 # KitchenMeasures
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kitchen_measures`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem provides a simple [value object][] for dealing with measures used in
+cooking and baking. Behind the scenes it uses [unitwise]. The main difference in
+behaviour is support for unitless measures which are often found in recipes, such
+as "2 eggs" or "1 large carrot".
 
 ## Installation
 
@@ -35,5 +36,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/kitchen_measures.
+Bug reports and pull requests are welcome on GitHub at https://github.com/andyw8/kitchen_measures.
 
+[value object]: https://en.wikipedia.org/wiki/Value_object
+[unitwise]: https://github.com/joshwlewis/unitwise
