@@ -22,7 +22,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+flour_measure = KitchenMeasures::Measure.with_unit(500, "g")
+eggs_measure = KitchenMeasures::Measure.without_unit(6)
+```
 
 ## Development
 
