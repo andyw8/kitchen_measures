@@ -79,7 +79,7 @@ module KitchenMeasures
     attr_reader :quantity, :unit
 
     def to_unitwise
-      if unit == Unitless.instance
+      if unitless?
         raise "Cannot convert unitless measure to Unitwise"
       end
 
