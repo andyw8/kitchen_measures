@@ -62,6 +62,14 @@ module KitchenMeasures
       end
     end
 
+    def comparable_with?(other)
+      if to_unitwise <=> other.to_unitwise
+        true
+      else
+        false
+      end
+    end
+
     protected
 
     attr_reader :quantity, :unit

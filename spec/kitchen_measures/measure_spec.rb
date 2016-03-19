@@ -115,4 +115,24 @@ RSpec.describe KitchenMeasures::Measure do
       expect(result).to be(false)
     end
   end
+
+  describe "comparable_with?" do
+    it "returns true if two objects are comparable" do
+      measure = described_class.with_unit(1, "g")
+      other_measure = described_class.with_unit(1, "kg")
+
+      result = measure.comparable_with?(other_measure)
+
+      expect(result).to be(true)
+    end
+
+    it "returns false if two objects are not comparable" do
+      measure = described_class.with_unit(1, "g")
+      other_measure = described_class.with_unit(1, "ml")
+
+      result = measure.comparable_with?(other_measure)
+
+      expect(result).to be(false)
+    end
+  end
 end
