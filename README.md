@@ -26,6 +26,17 @@ Or install it yourself as:
 ```ruby
 flour_measure = KitchenMeasures::Measure.with_unit(500, "g")
 eggs_measure = KitchenMeasures::Measure.without_unit(6)
+
+measures = [flour_measure, eggs_measure]
+
+measures.each do |measure|
+  puts measure * 2
+end
+
+# output
+
+1000 g
+12
 ```
 
 ## Development
