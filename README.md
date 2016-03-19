@@ -25,18 +25,17 @@ Or install it yourself as:
 
 ```ruby
 flour_measure = KitchenMeasures::Measure.with_unit(500, "g")
+sugar_measure = KitchenMeasures::Measure.with_unit(2, "oz")
+water_measure = KitchenMeasures::Measure.with_unit(1, "l")
 eggs_measure = KitchenMeasures::Measure.without_unit(6)
 
-measures = [flour_measure, eggs_measure]
+flour_measure.to_s #=> 1000 g
+sugar_measure.to_s #=> 2 oz
+water_measure.to_s #=> 2 l
+eggs_measure.to_s #=> 12
 
-measures.each do |measure|
-  puts measure * 2
-end
-
-# output
-
-1000 g
-12
+flour_measure.comparable_with?(sugar_measure) #=> true
+flour_measure.comparable_with?(water_measure) #=> false
 ```
 
 ## Development
