@@ -63,7 +63,11 @@ module KitchenMeasures
     end
 
     def comparable_with?(other)
-      if to_unitwise <=> other.to_unitwise
+      if [self, other].all?(&:unitless?)
+        true
+      elsif [self, other].any?(&:unitless?)
+        false
+      elsif to_unitwise <=> other.to_unitwise
         true
       else
         false

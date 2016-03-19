@@ -117,22 +117,44 @@ RSpec.describe KitchenMeasures::Measure do
   end
 
   describe "comparable_with?" do
-    it "returns true if two objects are comparable" do
-      measure = described_class.with_unit(1, "g")
-      other_measure = described_class.with_unit(1, "kg")
+    context "with units" do
+      it "returns true if two objects are comparable" do
+        measure = described_class.with_unit(1, "g")
+        other_measure = described_class.with_unit(1, "kg")
 
-      result = measure.comparable_with?(other_measure)
+        result = measure.comparable_with?(other_measure)
 
-      expect(result).to be(true)
+        expect(result).to be(true)
+      end
+
+      it "returns false if two objects are not comparable" do
+        measure = described_class.with_unit(1, "g")
+        other_measure = described_class.with_unit(1, "ml")
+
+        result = measure.comparable_with?(other_measure)
+
+        expect(result).to be(false)
+      end
     end
 
-    it "returns false if two objects are not comparable" do
-      measure = described_class.with_unit(1, "g")
-      other_measure = described_class.with_unit(1, "ml")
+    context "without units" do
+      it "returns true if two objects are comparable" do
+        measure = described_class.without_unit(1)
+        other_measure = described_class.without_unit(1)
 
-      result = measure.comparable_with?(other_measure)
+        result = measure.comparable_with?(other_measure)
 
-      expect(result).to be(false)
+        expect(result).to be(true)
+      end
+
+      it "returns false if two objects are not comparable" do
+        measure = described_class.without_unit(1)
+        other_measure = described_class.with_unit(1, "ml")
+
+        result = measure.comparable_with?(other_measure)
+
+        expect(result).to be(false)
+      end
     end
   end
 end
