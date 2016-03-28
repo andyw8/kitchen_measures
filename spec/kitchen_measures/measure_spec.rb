@@ -157,4 +157,48 @@ RSpec.describe KitchenMeasures::Measure do
       end
     end
   end
+
+  describe "#weight?" do
+    specify do
+      measure = described_class.with_unit(3, "kg")
+
+      result = measure.weight?
+
+      expect(result).to be(true)
+    end
+
+    specify do
+      measure = described_class.with_unit(3, "l")
+
+      result = measure.weight?
+
+      expect(result).to be(false)
+    end
+
+    specify do
+      measure = described_class.without_unit(3)
+
+      result = measure.weight?
+
+      expect(result).to be(false)
+    end
+  end
+
+  describe "#volume?" do
+    specify do
+      measure = described_class.with_unit(3, "l")
+
+      result = measure.volume?
+
+      expect(result).to be(true)
+    end
+
+    specify do
+      measure = described_class.with_unit(3, "kg")
+
+      result = measure.volume?
+
+      expect(result).to be(false)
+    end
+  end
 end

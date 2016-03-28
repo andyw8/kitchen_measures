@@ -34,6 +34,12 @@ sugar_measure.to_s #=> 2 oz
 water_measure.to_s #=> 2 l
 eggs_measure.to_s #=> 12
 
+flour_measure.weight? #=> true
+flour_measure.volume? #=> false
+eggs_measure.weight? #=> false
+eggs_measure.volume? #=> false
+eggs_measure.volume? #=> false
+
 flour_measure.comparable_with?(sugar_measure) #=> true
 flour_measure.comparable_with?(water_measure) #=> false
 ```

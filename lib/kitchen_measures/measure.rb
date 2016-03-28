@@ -74,6 +74,16 @@ module KitchenMeasures
       end
     end
 
+    def weight?
+      return false if unitless?
+      unitwise_property == "mass"
+    end
+
+    def volume?
+      return false if unitless?
+      unitwise_property == "volume"
+    end
+
     protected
 
     attr_reader :quantity, :unit
@@ -84,6 +94,12 @@ module KitchenMeasures
       end
 
       Unitwise(quantity, unit)
+    end
+
+    def unitwise_property
+      terms = to_unitwise.terms
+      raise "Multiple terms" if terms.size > 1
+      terms.first.atom.property
     end
   end
 end
