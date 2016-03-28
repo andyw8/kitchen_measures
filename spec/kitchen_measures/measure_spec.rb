@@ -201,4 +201,36 @@ RSpec.describe KitchenMeasures::Measure do
       expect(result).to be(false)
     end
   end
+
+  describe "#to_db_attrs" do
+    specify do
+      measure = described_class.with_unit(3, "kg")
+
+      result = measure.to_db_attrs
+
+      expect(result).to eq(quantity: 3, unit: "kg")
+    end
+
+    specify do
+      measure = described_class.without_unit(3)
+
+      result = measure.to_db_attrs
+
+      expect(result).to eq(quantity: 3, unit: nil)
+    end
+  end
+
+  describe ".from_db_attrs" do
+    specify do
+      result = described_class.from_db_attrs(3, "kg")
+
+      expect(result).to eq(described_class.with_unit(3, "kg"))
+    end
+
+    specify do
+      result = described_class.from_db_attrs(3, nil)
+
+      expect(result).to eq(described_class.without_unit(3))
+    end
+  end
 end

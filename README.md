@@ -44,6 +44,17 @@ flour_measure.comparable_with?(sugar_measure) #=> true
 flour_measure.comparable_with?(water_measure) #=> false
 ```
 
+## Rails Support
+
+KitchenMeasures isn't coupled to Rails, but there a couple of methods provided
+for convenience.
+
+`.from_db_attrs` accepts a quantity, and an unit. If the unit is nil, the measure will
+be treated as unitless.
+
+`#to_db_attrs` does the opposite. It converts a measure to has so that it can be
+persisted to the database.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

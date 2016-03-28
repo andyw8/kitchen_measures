@@ -30,6 +30,14 @@ module KitchenMeasures
       new(quantity, Unitless.instance)
     end
 
+    def self.from_db_attrs(quantity, db_unit)
+      if db_unit
+        with_unit(quantity, db_unit)
+      else
+        without_unit(quantity)
+      end
+    end
+
     def to_s
       [quantity, unit].join(" ").strip
     end
@@ -84,6 +92,13 @@ module KitchenMeasures
       unitwise_property == "volume"
     end
 
+    def to_db_attrs
+      {
+        quantity: quantity,
+        unit: db_unit
+      }
+    end
+
     protected
 
     attr_reader :quantity, :unit
@@ -96,10 +111,20 @@ module KitchenMeasures
       Unitwise(quantity, unit)
     end
 
+    private
+
     def unitwise_property
       terms = to_unitwise.terms
       raise "Multiple terms" if terms.size > 1
       terms.first.atom.property
+    end
+
+    def db_unit
+      if unitless?
+        nil
+      else
+        unit
+      end
     end
   end
 end
