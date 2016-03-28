@@ -13,11 +13,6 @@ module KitchenMeasures
       end
     end
 
-    def initialize(quantity, unit)
-      @quantity = quantity
-      @unit = unit or raise ArgumentError("Missing unit")
-    end
-
     def self.with_unit(quantity, unit)
       new(quantity, unit)
     end
@@ -36,6 +31,11 @@ module KitchenMeasures
       else
         without_unit(quantity)
       end
+    end
+
+    def initialize(quantity, unit)
+      @quantity = quantity
+      @unit = unit or raise ArgumentError("Missing unit")
     end
 
     def to_s
@@ -103,6 +103,11 @@ module KitchenMeasures
 
     attr_reader :quantity, :unit
 
+    def unit_normalized
+      term = to_unitwise.unit.terms.first
+      [term.prefix.to_s, term.atom.symbol].join
+    end
+
     def to_unitwise
       if unitless?
         raise "Cannot convert unitless measure to Unitwise"
@@ -112,6 +117,10 @@ module KitchenMeasures
     end
 
     private
+
+    def to_s_normalized
+      [quantity, unit_normalized].join(" ").strip
+    end
 
     def unitwise_property
       terms = to_unitwise.terms
@@ -123,7 +132,7 @@ module KitchenMeasures
       if unitless?
         nil
       else
-        unit
+        unit_normalized
       end
     end
   end

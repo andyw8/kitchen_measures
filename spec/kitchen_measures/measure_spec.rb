@@ -218,6 +218,22 @@ RSpec.describe KitchenMeasures::Measure do
 
       expect(result).to eq(quantity: 3, unit: nil)
     end
+
+    specify do
+      measure = described_class.with_unit(1, "kilogram")
+
+      result = measure.to_db_attrs
+
+      expect(result).to include(unit: "kg")
+    end
+
+    specify do
+      measure = described_class.with_unit(1, "oz fl")
+
+      result = measure.to_db_attrs
+
+      expect(result).to include(unit: "oz fl")
+    end
   end
 
   describe ".from_db_attrs" do

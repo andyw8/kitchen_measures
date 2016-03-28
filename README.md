@@ -53,7 +53,8 @@ for convenience.
 be treated as unitless.
 
 `#to_db_attrs` does the opposite. It converts a measure to has so that it can be
-persisted to the database.
+persisted to the database. This will also ensure units are stored in a
+consistent way, e.g. "kg" instead of "kilogram".
 
 ## Development
 
