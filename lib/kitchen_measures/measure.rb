@@ -14,6 +14,8 @@ module KitchenMeasures
     end
 
     def self.with_unit(quantity, unit)
+      raise ArgumentError, "Missing unit" if unit.nil?
+      raise ArgumentError, "Blank unit" if unit.strip == ""
       new(quantity, unit)
     end
 
@@ -35,7 +37,7 @@ module KitchenMeasures
 
     def initialize(quantity, unit)
       @quantity = quantity
-      @unit = unit or raise ArgumentError("Missing unit")
+      @unit = unit
     end
 
     def to_s

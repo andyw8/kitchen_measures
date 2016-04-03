@@ -1,10 +1,18 @@
 require "spec_helper"
 
 RSpec.describe KitchenMeasures::Measure do
+  describe "initialization" do
+    it "raises an arguemnt error if the unit is nil" do
+      expect { described_class.with_unit(1, nil) }.to raise_error ArgumentError
+    end
+
+    it "raises an arguemnt error if the unit is blank" do
+      expect { described_class.with_unit(1, "") }.to raise_error ArgumentError
+    end
+  end
   describe "#to_s" do
     specify do
-      unit = double(:unit, to_s: "g")
-      measure = described_class.with_unit(1, unit)
+      measure = described_class.with_unit(1, "g")
 
       result = measure.to_s
 
